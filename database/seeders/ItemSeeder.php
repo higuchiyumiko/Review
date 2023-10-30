@@ -21,12 +21,14 @@ class ItemSeeder extends Seeder
             'market_name'=>'○○商店',
             'allergy'=>'卵',
             'category_id'=>1,
+            'item_image'=>'/Review/public/img/バターサンド.jpg',
             ]);
             DB::table('items')->insert([
             'name'=>'商品名2',
             'market_name'=>'○○製菓',
             'allergy'=>'小麦',
             'category_id'=>2,
+            'item_image'=>'/Review/public/img/じゃこてん.jpg',
             ]);
     }
 }

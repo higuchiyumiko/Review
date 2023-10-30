@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Category;
 use App\Models\Review;
+use App\Models\Like;
 use App\Http\Controllers\Controller;
 use Cloudinary;
 
 class ItemController extends Controller
 {
     public function index(Review $review){
-        return view('items.index')->with(['reviews'=>$review->getPaginateByLimit()]);
+        $likes=Like::where('review_id', $review->id)->where('user_id', auth()->user()->id)->first();
+        return view('items.index',compact('likes'))->with(['reviews'=>$review->getPaginateByLimit()]);
     }
     public function nav(Item $item){
         return view('items/navigation');
@@ -33,26 +35,28 @@ class ItemController extends Controller
         return view('items.register');
     }
     public function store(Request $request,Item $item){
-        $input=$request['items'];
-        if($request->file('image')){ //画像ファイルが送られた時だけ処理が実行される
-            $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
-            $input += ['image_url' => $image_url];
-        }
-       // $image_url=Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
-        //$input=$request['items'];
-        //$input+=['item_image'=>$image_url];
+        //cloudinaryへ画像を送信し、画像のURLを$image_urlに代入している
+        $input = $request['items'];
+        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+        $input += ['item_image' => $image_url];  //追加
         $item->fill($input)->save();
         return redirect('/');
     }
-    public function create(Request $request){
+    public function create2(Request $request){
         $data=Item::where('id',$request->item)->first();
         return view('items.create',$data)->with(['data'=>$data]);
+    }
+     public function create(Item $item){
+        return view('items.create')->with(['item'=>$item]);
     }
     public function show(Item $item){
         return view('items.show')->with(['items'=>$item->getPaginateByLimit()]);
     }
+     public function detail(Item $item){
+        return view('items.detail')->with(['item'=>$item]);
+    }
     public function edit(Item $item){
-        return view('items/edit')->with(['item'=>$item]);
+        return view('items.edit')->with(['item'=>$item]);
     }
     public function update(Request $request ,Item $item){
    //     $image_url=Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
