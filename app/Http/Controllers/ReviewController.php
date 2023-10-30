@@ -17,9 +17,11 @@ class ReviewController extends Controller
         $review->fill($input)->save();
         return redirect('/');
     }
-    public function show(Request $request,Review $review,Item $item){
-        $input=request('id');
-        $data=Review::find($input);
-        return view('review/show',compact('data'))->with(['reviews' => $review->get()])->with(['items' => $item->get()]);
+    public function show(Review $review){
+        //dd($review);
+        return view('reviews.show')->with(['reviews' => $review]);
+    }
+     public function detail(Item $item){
+        return view('items.detail')->with(['item'=>$item]);
     }
 }

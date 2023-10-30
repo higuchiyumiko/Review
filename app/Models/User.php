@@ -22,6 +22,13 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+    
+    public  function reviews(){
+        return $this->hasMany(Review::class);
+    }
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
