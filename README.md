@@ -1,9 +1,9 @@
 ## 概要
 
 お土産品の口コミを投稿できるアプリ
-<img src="/Review/public/img/image_01.png" alt="topページ" >
-<img src="/Review/public/img/image_02.png" alt="レビュー一覧ページ" >
-<img src="/Review/public/img/image_03.png" alt="登録一覧ページ" >
+![image_01](https://github.com/higuchiyumiko/Review/assets/101847022/c116deb8-fd9a-408b-b22f-161d31de238e)
+![image_02](https://github.com/higuchiyumiko/Review/assets/101847022/be367cc1-5586-4998-a4e5-2bb3e1c840f1)
+![image_03](https://github.com/higuchiyumiko/Review/assets/101847022/6db1a870-62ea-490e-9fc1-8ef4311a4533)
 
 ***デモ***
 
